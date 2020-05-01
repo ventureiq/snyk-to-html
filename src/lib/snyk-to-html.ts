@@ -8,7 +8,7 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import { getUpgrades, severityMap } from './vuln';
+import { addIssueDataToPatch, getUpgrades, severityMap } from "./vuln";
 
 const debug = debugModule('snyk-to-html');
 
@@ -122,11 +122,20 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any, template: string, showRemediation: boolean, summary: boolean): Promise<string> {
+async function generateTemplate(data: any,
+                                template: string,
+                                showRemediation: boolean,
+                                summary: boolean):
+                              Promise<string> {
   if (showRemediation && data.remediation) {
     data.showRemediations = showRemediation;
     data.unresolved = groupVulns(data.remediation.unresolved);
     data.upgrades = getUpgrades(data.remediation.upgrade, data.vulnerabilities);
+    data.patches = addIssueDataToPatch(
+      data.remediation.patch,
+      data.vulnerabilities,
+    );
+    console.log(data.patch);
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = _.orderBy(

@@ -5,6 +5,13 @@ export interface ActionableRemediation {
   severityScore: number;
 }
 
+export interface ActionablePatch {
+  severity: number;
+  title: string;
+  name: string;
+  version: string;
+}
+
 export interface Vuln {
   id: string;
   title: string;
