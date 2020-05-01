@@ -21,7 +21,8 @@ Alternatively, you can skip this step, clone the repo and run the script locally
 2. `-i` or `--input`   -  Input path from where to read the json. Defaults to stdin
 3. `-o` or `--output`  -  Output of the resulting HTML. Example: -o snyk.html. Defaults to stdout
 4. `-s` or `--summary` -  Generates an HTML with only the summary, instead of the details report. Defaults to details vulnerability report
-5. `-d` or `--debug`   -  Runs the CLI in debug mode 
+5. `-d` or `--debug`   -  Runs the CLI in debug mode
+6. `-a` or `--actionable-remediation` -  Display actionable remediation info if available
 
 When in doubt, use `snyk-to-html --help` or `snyk-to-html -h`.
 
@@ -47,10 +48,17 @@ Change directory to your package's root folder, then use of the two ways below t
 
 3. By default, details about each vulnerability is shown. 
 
-    If you want a simpler version of the report to be shown, you can pass `-s` or `--summary` to only
-    display the summary of the report.
+   If you want a simpler version of the report to be shown, you can pass `-s` or `--summary` to only
+   display the summary of the report.
 
-    `snyk-to-html -i results.json -o results.html -s`
+   `snyk-to-html -i results.json -o results.html -s`
+
+4. Show actionable remediations:
+
+To display the actions you can take to remedy vulnerabilities, pass `-a` or `--actionable-remediations`.
+
+`snyk-to-html -i results.json -o results.html -a`
+
 
 ## View the HTML report
 
