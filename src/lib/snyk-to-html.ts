@@ -140,6 +140,7 @@ async function generateTemplate(data: any, template: string, remediation: boolea
   data.showSummaryOnly = summary;
 
   await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'actionable-css');
   await registerPeerPartial(template, 'vuln-card');
   await registerPeerPartial(template, 'actionable-remediations');
 

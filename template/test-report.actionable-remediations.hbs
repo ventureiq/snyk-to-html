@@ -1,30 +1,36 @@
 <div>
   {{#if upgrades}}
-  <div class="card--vuln card__title">Upgradable issues ({{upgrades.length}})</div>
-  {{#each upgrades}}
-  <div class="card--vuln">
-    <div class="card--title">
-      <!-- draw chevron icon -->
-      <span class="upgrade--arrow" aria-label="Chevron Down icon" role="img"><svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
-          class="material-design-icon__svg block-expandable__chevron">
-          <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
-            <title>Chevron Down icon</title>
-          </path>
-        </svg>
-      </span>
-      <!-- end of chevron icon -->
-      <div>Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong></div>
-    </div>
-    <div class="card--content">
-      <ul>
-        {{#each vulns}}
-        <div class="card--vuln card__section card--item">
-          <a href="https://app.snyk.io/vuln/{{id}}">{{title}}</a>
+  <div class="tabs">
+    <div class="layout-container--tabs">Upgradable issues ({{upgrades.length}})</div><!-- container for upgrades -->
+    <div class="actionable-remediation-card-pane">
+      {{#each upgrades}}<!-- create card for each upgrade -->
+        <div class="base-block expandable">
+          <div class="block-expandable__header">
+            <!-- draw chevron icon -->
+            <span class="upgrade--arrow" aria-label="Chevron Down icon" role="img"><svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                class="material-design-icon__svg block-expandable__chevron">
+                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
+                  <title>Chevron Down icon</title>
+                </path>
+              </svg>
+            </span>
+            <!-- end of chevron icon -->
+            <div>Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong></div>
+          </div>
+          <div class="expand">
+            <div class="expandable-content">
+              <ul>
+                {{#each vulns}}
+                <div class="actionable-remediation-card__vuln">
+                  <span>{{title}}</span>
+                </div>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
         </div>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-  {{/each}}
+      {{/each}}<!-- end creating upgrade cards -->
+    </div><!-- end tabs pane -->
+  </div><!-- close upgrade container -->
   {{/if}}
 </div>
