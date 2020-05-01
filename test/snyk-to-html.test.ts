@@ -58,6 +58,20 @@ test('multi-report test with summary only', (t) => {
       });
 });
 
+test('multi-report test with actionable remediation', (t) => {
+  t.plan(1);
+  SnykToHtml.run(
+      path.join(__dirname, 'fixtures', 'multi-test-report.json'),
+      noRemediation,
+      path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
+      summaryOnly,
+      (report) => {
+        // can see actionable remediation
+        // TODO: add assertions
+        t.pass('TODO');
+      });
+});
+
 test('all-around test with summary only', (t) => {
   t.plan(5);
   SnykToHtml.run(

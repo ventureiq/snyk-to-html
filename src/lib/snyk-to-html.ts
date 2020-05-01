@@ -49,24 +49,24 @@ function promisedParseJSON(json) {
 
 class SnykToHtml {
   public static run(dataSource: string,
-                    remediation: boolean,
+                    showRemediation: boolean,
                     hbsTemplate: string,
                     summary: boolean,
                     reportCallback: (value: string) => void): void {
     SnykToHtml
-      .runAsync(dataSource, remediation, hbsTemplate, summary)
+      .runAsync(dataSource, showRemediation, hbsTemplate, summary)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
 
   public static async runAsync(source: string,
-                               remediation: boolean,
+                               showRemediation: boolean,
                                template: string,
                                summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
-      .then(data => processData(data, remediation, template, summary));
+      .then(data => processData(data, showRemediation, template, summary));
   }
 }
 
@@ -122,9 +122,9 @@ async function registerPeerPartial(templatePath: string, name: string): Promise<
   Handlebars.registerPartial(name, template);
 }
 
-async function generateTemplate(data: any, template: string, remediation: boolean, summary: boolean): Promise<string> {
-  if (remediation && data.remediation) {
-    data.showRemediations = remediation;
+async function generateTemplate(data: any, template: string, showRemediation: boolean, summary: boolean): Promise<string> {
+  if (showRemediation && data.remediation) {
+    data.showRemediations = showRemediation;
     data.unresolved = groupVulns(data.remediation.unresolved);
     data.upgrades = getUpgrades(data.remediation.upgrade, data.vulnerabilities);
   }
@@ -140,9 +140,11 @@ async function generateTemplate(data: any, template: string, remediation: boolea
   data.showSummaryOnly = summary;
 
   await registerPeerPartial(template, 'inline-css');
-  await registerPeerPartial(template, 'actionable-css');
   await registerPeerPartial(template, 'vuln-card');
+  await registerPeerPartial(template, 'remediation-css');
   await registerPeerPartial(template, 'actionable-remediations');
+  await registerPeerPartial(template, 'metatable');
+  await registerPeerPartial(template, 'metatable-css');
 
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
@@ -168,9 +170,9 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
-async function processData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
+async function processData(data: any, showRemediation: boolean, template: string, summary: boolean): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
-  return generateTemplate(mergedData, template, remediation, summary);
+  return generateTemplate(mergedData, template, showRemediation, summary);
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -221,7 +223,7 @@ const hh = {
       default: return choose(false);
     }
   },
-  getRemediation: function(description, fixedIn) {
+  getRemediation: (description: string, fixedIn: string[]) =>  {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
@@ -236,6 +238,9 @@ const hh = {
     // otherwise, fallback to default message, i.e. No remediation at the moment
     return marked(defaultRemediationText);
   },
+  severityLabel: (severity: string) => {
+    return severity[0].toUpperCase();
+  }
 };
 
 Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));
