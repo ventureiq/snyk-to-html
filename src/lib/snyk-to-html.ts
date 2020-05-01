@@ -142,7 +142,6 @@ async function generateTemplate(data: any, template: string, remediation: boolea
   await registerPeerPartial(template, 'inline-css');
   await registerPeerPartial(template, 'vuln-card');
   await registerPeerPartial(template, 'actionable-remediations');
-  await registerPeerPartial(template, 'remediation-card');
 
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
