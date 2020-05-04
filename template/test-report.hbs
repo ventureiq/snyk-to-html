@@ -12,7 +12,6 @@
     sizes="194x194">
   <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
   {{> inline-css }}
-  {{> metatable-css }}
 </head>
 
 <body class="section-projects">
@@ -54,15 +53,17 @@
       </header><!-- .project__header -->
     </div><!-- .layout-stacked__header -->
 
-    {{> metatable}}
-
     <div class="layout-stacked__content">
       <div class="layout-container--short" style="padding-top: 35px;">
+      {{#if vulnerabilities}}
         <div class="cards--vuln filter--patch filter--ignore">
           {{#each vulnerabilities}}
           {{> vuln-card showSummaryOnly=../showSummaryOnly}}
           {{/each}}
         </div><!-- cards -->
+      {{else}}
+        No known vulnerabilities detected.
+      {{/if}}
       </div>
     </div><!-- .layout-container -->
 
