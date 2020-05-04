@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="{{uniqueCount}} known vulnerabilities found in {{summary}}.">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  {{> inline-css }}
+  {{> remediation-css }}
+</head>
+
+<body class="remediation-section-projects">
+  <main class="layout-stacked">
+    <div class="layout-stacked__header header">
+      <header class="project__header">
+        <div class="layout-container--short">
+          {{#unless showSummaryOnly}}
+          <h1 class="project__header__title">Snyk test report</h1>
+          {{else}}
+          <h1 class="project__header__title">Snyk test summary</h1>
+          {{/unless}}
+          <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
+          {{#if paths}}
+          <div class="source-panel">
+            <span>Scanned the following paths:</span>
+            <ul>
+              {{#each paths}}<li>{{path}} ({{packageManager}})</li>{{/each}}
+            </ul>
+          </div>
+          {{/if}}
+          {{#if path}}
+          <div class="source-panel">
+            <span>Scanned the following path:</span>
+            <ul>
+              <li>{{path}} ({{packageManager}})</li>
+            </ul>
+          </div>
+          {{/if}}
+          <div class="meta-counts">
+            <div class="meta-count"><span>{{uniqueCount}}</span> <span>known vulnerabilities</span></div>
+            <div class="meta-count"><span>{{summary}}</span></div>
+            <div class="meta-count"><span>{{dependencyCount}}</span> <span>dependencies</span></div>
+          </div><!-- .meta-counts -->
+        </div><!-- .layout-container--short -->
+      </header><!-- .project__header -->
+    </div><!-- .layout-stacked__header -->
+
+    {{#if anyRemediations}}
+      {{> actionable-remediations}}
+    {{/if}}
+
+    <!-- unresolved -->
+    <section class="layout-container" style="padding-top: 35px;">
+      <h2>No remediation path available</h2>
+      {{#each unresolved.vulnerabilities}}
+        {{> vuln-card showSummaryOnly=../showSummaryOnly}}
+      {{/each}}
+    </section><!-- end unresolved -->
+
+  </main><!-- .layout-stacked__content -->
+</body>
+{{> inline-js }}
+
+</html>
