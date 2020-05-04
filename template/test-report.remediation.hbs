@@ -46,7 +46,7 @@
         <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
       </span>
     </header><!-- .project__header -->
-    
+
     <div class="backdrop-neutral scoped">
 
       <div class="section-header">
@@ -65,7 +65,7 @@
         </div>
         {{/if}}
       </div>
-          
+
       <div class="layout-container">
         <table class="metatable">
           <tbody>
@@ -89,16 +89,16 @@
       </div>
 
         <!-- unresolved -->
-        <div class="layout-stacked__content" style="padding-top: 35px;">
+        <section class="card-body" style="padding-top: 35px;">
           <h2>No remediation path available</h2>
           {{#each unresolved.vulnerabilities}}
             {{> vuln-card showSummaryOnly=../showSummaryOnly}}
           {{/each}}
-        </div><!-- end unresolved -->
+        </section><!-- end unresolved -->
       </div>
     </div>
 
-  </main><!-- .layout-stacked__content -->
+  </main>
 </body>
 
 </html>
