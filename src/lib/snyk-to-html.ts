@@ -8,7 +8,7 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import { addIssueDataToPatch, getUpgrades, severityMap } from "./vuln";
+import { addIssueDataToPatch, getUpgrades, severityMap } from './vuln';
 
 const debug = debugModule('snyk-to-html');
 
@@ -249,7 +249,7 @@ const hh = {
   },
   severityLabel: (severity: string) => {
     return severity[0].toUpperCase();
-  }
+  },
 };
 
 Object.keys(hh).forEach(k => Handlebars.registerHelper(k, hh[k]));
