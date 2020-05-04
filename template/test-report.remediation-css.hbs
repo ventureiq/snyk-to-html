@@ -5,7 +5,6 @@
     padding: 1px;
     box-shadow: inset 0 0 0 1px #938fc7, 0 0 0 2px transparent;
     border-radius: 2px;
-    padding-top: 4em;
   }
   .remediation-card__header {
     align-items: center;
@@ -95,6 +94,14 @@
     justify-content: space-between;
     position: relative;
   }
+  .remediation-card__expandable-wrapper >  .remediation-card__expand {
+    visibility: hidden;
+    height: 0
+  }
+  .remediation-card__expandable-wrapper.shown > .remediation-card__expand {
+    visibility: visible;
+    height: auto;
+  }
   .remediation-card__expandable-title {
     align-items: center;
     display: flex;
@@ -119,10 +126,6 @@
     fill: currentColor;
     overflow: hidden;
     vertical-align: middle;
-  }
-  .remediation-card__text {
-    display: flex;
-    flex-grow: 1;
   }
   .remediation-card__severity {
     margin-right: 8px;
