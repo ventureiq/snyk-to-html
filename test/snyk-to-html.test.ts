@@ -1,3 +1,4 @@
+import { exec } from 'child_process';
 import path = require('path');
 import {test} from 'tap';
 import { SnykToHtml } from '../src/lib/snyk-to-html';
@@ -6,6 +7,45 @@ const summaryOnly = true;
 const noSummary = false;
 const remediation = true;
 const noRemediation = false;
+const main = '.'.replace(/\//g, path.sep);
+
+test('test calling snyk-to-html from command line', (t) => {
+  t.plan(1);
+  exec(`node ${main} -i ./test/fixtures/multi-test-report.json -o ./results.html`, (err, stdout) => {
+    if (err) {
+      throw err;
+    }
+    t.match(stdout.trim(), 'Vulnerability snapshot saved at ./results.html', 'should confirm it has run');
+  });
+});
+
+test('test snyk-to-html handles -s argument correctly', (t) => {
+  t.plan(2);
+  exec(`node ${main} -i ./test/fixtures/test-report-with-remediation.json -s`, (err, stdout) => {
+    if (err) {
+      throw err;
+    }
+    const regex = /<p class="timestamp">.*<\/p>/g;
+    const cleanTimestamp = rep => rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
+    const cleanedReport = cleanTimestamp(stdout);
+    t.doesNotHave(cleanedReport, '<h2 id="overview">Overview</h2>', 'does not contain overview of the vulnerability');
+    t.matchSnapshot(cleanedReport, 'should be expected snapshot containing summary template');
+  });
+});
+
+test('test snyk-to-html handles -a argument correctly', (t) => {
+  t.plan(2);
+  exec(`node ${main} -i ./test/fixtures/test-report-with-remediation.json -a`, (err, stdout) => {
+    if (err) {
+      throw err;
+    }
+    const regex = /<p class="timestamp">.*<\/p>/g;
+    const cleanTimestamp = rep => rep.replace(regex, '<p class="timestamp">TIMESTAMP</p>');
+    const cleanedReport = cleanTimestamp(stdout);
+    t.contains(cleanedReport, '<body class="remediation-section-projects">', 'should contain remediation section');
+    t.matchSnapshot(cleanedReport, 'should be expected snapshot containing actionable remediations');
+  });
+});
 
 test('all-around test', (t) => {
   t.plan(5);
