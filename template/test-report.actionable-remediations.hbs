@@ -43,16 +43,16 @@
                       <div class='remediation-card__expand'>
                           <!--each vuln for the upgrade -->
                           <ul>
-                          {{#each vulns}}
-                          <li class='remediation-card__item'>
-                            <div class='remediation-card__vuln'>
-                              <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
-                              <a href="https://snyk.io/vuln/{{id}}">
-                                {{title}}
-                              </a>
-                            </div>
-                          </li>
-                          {{/each}}
+                            {{#each vulns}}
+                              <li class='remediation-card__item'>
+                                <div class='remediation-card__vuln'>
+                                  <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
+                                  <a href="https://snyk.io/vuln/{{id}}">
+                                    {{title}}
+                                  </a>
+                                </div>
+                              </li>
+                            {{/each}}
                           </ul>
                       </div>
                   </div>
