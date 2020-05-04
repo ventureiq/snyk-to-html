@@ -88,7 +88,6 @@ export function addIssueDataToPatch(remediation, vulnerabilities) {
   return patches;
 }
 
-
 // function addIssueDataToUpgradeAndPin(remediation, issues, sortBy) {
 //   Object.values(remediation).forEach((packData) => {
 //     const issueData = packData.vulns

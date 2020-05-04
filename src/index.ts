@@ -23,9 +23,9 @@ if (program.template) { // template
   template = program.template; // grab the next item
   if (typeof template === 'boolean') {
     if (program.actionableRemediation) {
-      template = path.join(__dirname, "../template/remediation-report.hbs");
+      template = path.join(__dirname, '../template/remediation-report.hbs');
     } else {
-      template = path.join(__dirname, "../template/test-report.hbs");
+      template = path.join(__dirname, '../template/test-report.hbs');
     }
   }
 } else {
