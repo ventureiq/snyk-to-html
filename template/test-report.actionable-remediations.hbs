@@ -48,7 +48,7 @@
                         {{#each vulns}}
                         <li class='remediation-card__item'>
                           <div class='remediation-card__vuln'>
-                            <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
+                            <div title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></div>
                             <span>{{title}}</span>
                           </div>
                         </li>

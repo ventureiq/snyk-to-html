@@ -4,6 +4,7 @@ import { SnykToHtml } from '../src/lib/snyk-to-html';
 
 const summaryOnly = true;
 const noSummary = false;
+const remediation = true;
 const noRemediation = false;
 
 test('all-around test', (t) => {
@@ -59,16 +60,19 @@ test('multi-report test with summary only', (t) => {
 });
 
 test('multi-report test with actionable remediation', (t) => {
-  t.plan(1);
+  t.plan(4);
   SnykToHtml.run(
-      path.join(__dirname, 'fixtures', 'multi-test-report.json'),
-      noRemediation,
+      path.join(__dirname, 'fixtures', 'test-report-with-remediation.json'),
+      remediation,
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
       summaryOnly,
       (report) => {
         // can see actionable remediation
         // TODO: add assertions
-        t.pass('TODO');
+        t.contains(report, '<body class="remediation-section-projects">', 'should contain remediation section');
+        t.contains(report, '.remediation-card', 'should contain remediation partial');
+        t.contains(report, '.remediation-card__layout-container', 'should contain remediation tabs');
+        t.contains(report, '.remediation-card__pane', 'should contain individual remediations');
       });
 });
 
