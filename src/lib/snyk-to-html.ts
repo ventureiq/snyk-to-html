@@ -8,7 +8,7 @@ import Handlebars = require('handlebars');
 import marked = require('marked');
 import moment = require('moment');
 import path = require('path');
-import { addIssueDataToPatch, getUpgrades, severityMap } from './vuln';
+import { getUpgrades, severityMap, addIssueDataToPatch } from './vuln';
 
 const debug = debugModule('snyk-to-html');
 
@@ -49,24 +49,24 @@ function promisedParseJSON(json) {
 
 class SnykToHtml {
   public static run(dataSource: string,
-                    showRemediation: boolean,
+                    remediation: boolean,
                     hbsTemplate: string,
                     summary: boolean,
                     reportCallback: (value: string) => void): void {
     SnykToHtml
-      .runAsync(dataSource, showRemediation, hbsTemplate, summary)
+      .runAsync(dataSource, remediation, hbsTemplate, summary)
       .then(reportCallback)
       .catch(handleInvalidJson);
   }
 
   public static async runAsync(source: string,
-                               showRemediation: boolean,
+                               remediation: boolean,
                                template: string,
                                summary: boolean): Promise<string> {
     const promisedString = source ? readFile(source, 'utf8') : readInputFromStdin();
     return promisedString
       .then(promisedParseJSON)
-      .then(data => processData(data, showRemediation, template, summary));
+      .then(data => processData(data, remediation, template, summary));
   }
 }
 
@@ -128,11 +128,15 @@ async function generateTemplate(data: any,
                                 summary: boolean):
                               Promise<string> {
   if (showRemediation && data.remediation) {
-    data.showRemediations = showRemediation;
-    data.unresolved = groupVulns(data.remediation.unresolved);
-    data.upgrades = getUpgrades(data.remediation.upgrade, data.vulnerabilities);
+    data.showRemediations = showRemediation ;
+    const {upgrade, pin, unresolved, patch} = data.remediation;
+    data.anyRemediations = !_.isEmpty(upgrade) ||
+    !_.isEmpty(patch) || !_.isEmpty(pin);
+    data.unresolved = groupVulns(unresolved);
+    data.upgrades = getUpgrades(upgrade, data.vulnerabilities);
+    data.pins = getUpgrades(pin, data.vulnerabilities);
     data.patches = addIssueDataToPatch(
-      data.remediation.patch,
+      patch,
       data.vulnerabilities,
     );
   }
@@ -152,8 +156,6 @@ async function generateTemplate(data: any,
   await registerPeerPartial(template, 'vuln-card');
   await registerPeerPartial(template, 'remediation-css');
   await registerPeerPartial(template, 'actionable-remediations');
-  await registerPeerPartial(template, 'metatable');
-  await registerPeerPartial(template, 'metatable-css');
 
   const htmlTemplate = await compileTemplate(template);
   return htmlTemplate(data);
@@ -179,9 +181,9 @@ function mergeData(dataArray: any[]): any {
   };
 }
 
-async function processData(data: any, showRemediation: boolean, template: string, summary: boolean): Promise<string> {
+async function processData(data: any, remediation: boolean, template: string, summary: boolean): Promise<string> {
   const mergedData = Array.isArray(data) ? mergeData(data) : data;
-  return generateTemplate(mergedData, template, showRemediation, summary);
+  return generateTemplate(mergedData, template, remediation, summary);
 }
 
 async function readInputFromStdin(): Promise<string> {
@@ -232,7 +234,7 @@ const hh = {
       default: return choose(false);
     }
   },
-  getRemediation: (description: string, fixedIn: string[]) =>  {
+  getRemediation: (description, fixedIn) => {
     // check remediation in the description
     const index = description.indexOf('## Remediation');
     if (index > -1) {
