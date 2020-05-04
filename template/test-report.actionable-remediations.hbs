@@ -41,19 +41,19 @@
                         </div>
                       </div>
                       <div class='remediation-card__expand'>
-                        <div class='TODO'>
                           <!--each vuln for the upgrade -->
                           <ul>
                           {{#each vulns}}
                           <li class='remediation-card__item'>
                             <div class='remediation-card__vuln'>
                               <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
-                              <span>{{title}}</span>
+                              <a href="https://snyk.io/vuln/{{id}}">
+                                {{title}}
+                              </a>
                             </div>
                           </li>
                           {{/each}}
                           </ul>
-                        </div>
                       </div>
                   </div>
                 </div>
@@ -83,19 +83,19 @@
                         </div>
                       </div>
                       <div class='remediation-card__expand'>
-                        <div class='TODO'>
                           <!--each vuln for the upgrade -->
                           <ul>
                           {{#each vulns}}
                           <li class='remediation-card__item'>
                             <div class='remediation-card__vuln'>
                               <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
-                              <span>{{title}}</span>
+                              <a href="https://snyk.io/vuln/{{id}}">
+                                {{title}}
+                              </a>
                             </div>
                           </li>
                           {{/each}}
                           </ul>
-                        </div>
                       </div>
                   </div>
                 </div>
@@ -120,25 +120,17 @@
                             </svg>
                           </span>
                           <span class='remediation-card__text'>
-                            {{this}}
-                            Patch <strong> {{ patches.issueData.name }} </strong>@<strong> {{ upgradeTo }} </strong>
+                            Patch <strong> {{ issueData.name }} </strong>@<strong> {{ issueData.version }} </strong>
                           </span>
                         </div>
                       </div>
                       <div class='remediation-card__expand'>
-                        <div class='TODO'>
-                          <!--each vuln for the upgrade -->
-                          <ul>
-                          {{#each vulns}}
-                          <li class='remediation-card__item'>
-                            <div class='remediation-card__vuln'>
-                              <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
-                              <span>{{title}}</span>
-                            </div>
-                          </li>
-                          {{/each}}
-                          </ul>
-                        </div>
+                          <div class='remediation-card__vuln'>
+                            <abbr title="{{issueData.severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{issueData.severity}}"><span class="remediation-card__label">{{#severityLabel issueData.severity}}{{/severityLabel}}</span></abbr>
+                            <a href="https://snyk.io/vuln/{{id}}">
+                              {{issueData.title}}
+                            </a>
+                          </div>
                       </div>
                   </div>
                 </div>

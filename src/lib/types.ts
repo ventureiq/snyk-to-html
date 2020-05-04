@@ -6,10 +6,14 @@ export interface ActionableRemediation {
 }
 
 export interface ActionablePatch {
-  severity: number;
-  title: string;
-  name: string;
-  version: string;
+  id: string;
+  paths: object[];
+  issueData: {
+    severity: number;
+    title: string;
+    name: string;
+    version: string;
+  };
 }
 
 export interface Vuln {
