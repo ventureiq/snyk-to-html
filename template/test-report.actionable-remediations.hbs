@@ -20,48 +20,132 @@
           </ul>
         </nav>
       </div>
-      <div class='remediation-card__pane'>
-        <div class='remediation-card__layout-container'>
-          {{#if upgrades}}
-            {{#each upgrades}}
-              <div class='remediation-card__block'>
-                <div class='remediation-card__expandable-wrapper shown'>
-                    <div class='remediation-card__expandable-container js-remediation' >
-                      <div class='remediation-card__expandable-title'>
-                        <span class='remediation-card__chevron' aria-label="Chevron Down icon" role="img">
-                          <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
-                            class="material-design-icon__svg block-expandable__chevron">
-                            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
-                              <title>Chevron Down icon</title>
-                            </path>
-                          </svg>
-                        </span>
-                        <span class='remediation-card__text'>
-                          Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong>
-                        </span>
+      {{#if upgrades}}
+        <div class='remediation-card__pane'>
+          <div class='remediation-card__layout-container'>
+              {{#each upgrades}}
+                <div class='remediation-card__block'>
+                  <div class='remediation-card__expandable-wrapper shown'>
+                      <div class='remediation-card__expandable-container js-remediation' >
+                        <div class='remediation-card__expandable-title'>
+                          <span class='remediation-card__chevron' aria-label="Chevron Down icon" role="img">
+                            <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
+                              <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
+                                <title>Chevron Down icon</title>
+                              </path>
+                            </svg>
+                          </span>
+                          <span class='remediation-card__text'>
+                            Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div class='remediation-card__expand'>
-                      <div class='TODO'>
-                        <!--each vuln for the upgrade -->
-                        <ul>
-                        {{#each vulns}}
-                        <li class='remediation-card__item'>
-                          <div class='remediation-card__vuln'>
-                            <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
-                            <span>{{title}}</span>
-                          </div>
-                        </li>
-                        {{/each}}
-                        </ul>
+                      <div class='remediation-card__expand'>
+                        <div class='TODO'>
+                          <!--each vuln for the upgrade -->
+                          <ul>
+                          {{#each vulns}}
+                          <li class='remediation-card__item'>
+                            <div class='remediation-card__vuln'>
+                              <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
+                              <span>{{title}}</span>
+                            </div>
+                          </li>
+                          {{/each}}
+                          </ul>
+                        </div>
                       </div>
-                    </div>
+                  </div>
                 </div>
-              </div>
-            {{/each}}
-          {{/if}}
+              {{/each}}
+          </div>
         </div>
-      </div>
+      {{/if}}
+      {{#if pins}}
+        <div class='remediation-card__pane'>
+          <div class='remediation-card__layout-container'>
+              {{#each pins}}
+                <div class='remediation-card__block'>
+                  <div class='remediation-card__expandable-wrapper shown'>
+                      <div class='remediation-card__expandable-container js-remediation' >
+                        <div class='remediation-card__expandable-title'>
+                          <span class='remediation-card__chevron' aria-label="Chevron Down icon" role="img">
+                            <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                              class="block-expandable__chevron">
+                              <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
+                                <title>Chevron Down icon</title>
+                              </path>
+                            </svg>
+                          </span>
+                          <span class='remediation-card__text'>
+                            Upgrade <strong> {{ upgradeFrom }} </strong> to <strong> {{ upgradeTo }} </strong>
+                          </span>
+                        </div>
+                      </div>
+                      <div class='remediation-card__expand'>
+                        <div class='TODO'>
+                          <!--each vuln for the upgrade -->
+                          <ul>
+                          {{#each vulns}}
+                          <li class='remediation-card__item'>
+                            <div class='remediation-card__vuln'>
+                              <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
+                              <span>{{title}}</span>
+                            </div>
+                          </li>
+                          {{/each}}
+                          </ul>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              {{/each}}
+          </div>
+        </div>
+      {{/if}}
+      {{#if patches}}
+        <div class='remediation-card__pane'>
+          <div class='remediation-card__layout-container'>
+              {{#each patches}}
+                <div class='remediation-card__block'>
+                  <div class='remediation-card__expandable-wrapper shown'>
+                      <div class='remediation-card__expandable-container js-remediation' >
+                        <div class='remediation-card__expandable-title'>
+                          <span class='remediation-card__chevron' aria-label="Chevron Down icon" role="img">
+                            <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                              class="block-expandable__chevron">
+                              <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z">
+                                <title>Chevron Down icon</title>
+                              </path>
+                            </svg>
+                          </span>
+                          <span class='remediation-card__text'>
+                            {{this}}
+                            Patch <strong> {{ patches.issueData.name }} </strong>@<strong> {{ upgradeTo }} </strong>
+                          </span>
+                        </div>
+                      </div>
+                      <div class='remediation-card__expand'>
+                        <div class='TODO'>
+                          <!--each vuln for the upgrade -->
+                          <ul>
+                          {{#each vulns}}
+                          <li class='remediation-card__item'>
+                            <div class='remediation-card__vuln'>
+                              <abbr title="{{severity}} severity issues" class="remediation-card__severity-text remediation-card__severity--{{severity}}"><span class="remediation-card__label">{{#severityLabel severity}}{{/severityLabel}}</span></abbr>
+                              <span>{{title}}</span>
+                            </div>
+                          </li>
+                          {{/each}}
+                          </ul>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              {{/each}}
+          </div>
+        </div>
+      {{/if}}
     </div>
   </div>
 </section>
