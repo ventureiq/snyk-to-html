@@ -1,19 +1,16 @@
-export interface ActionableRemediation {
+export interface UpgradeRemediation {
   upgradeFrom: string; // e.g. package@version
   upgradeTo: string; // e.g. package@version
   vulns: Vuln[];
   severityScore: number;
+  isTransitive?: boolean;
 }
 
-export interface ActionablePatch {
-  id: string;
+export interface PatchRemediation {
   paths: object[];
-  issueData: {
-    severity: number;
-    title: string;
-    name: string;
-    version: string;
-  };
+  issueData: Vuln;
+  name: string;
+  version: string;
 }
 
 export interface Vuln {
