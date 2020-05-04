@@ -1,0 +1,11 @@
+<script>
+  const remediations = document.querySelectorAll(".js-remediation")
+  remediations.forEach((question) => {
+    question.parentElement.classList.toggle("shown");
+    question.addEventListener("click", remediationClick);
+  })
+
+  function remediationClick(){
+    this.parentElement.classList.toggle("shown");
+  }
+</script>

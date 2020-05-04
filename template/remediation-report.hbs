@@ -28,7 +28,7 @@
           {{/unless}}
           <p class="timestamp">{{moment d "MMMM Do YYYY, h:mm:ss a"}}</p>
           {{#if paths}}
-          <div class="source-panel">
+          <div class="csource-panel">
             <span>Scanned the following paths:</span>
             <ul>
               {{#each paths}}<li>{{path}} ({{packageManager}})</li>{{/each}}
@@ -65,5 +65,6 @@
 
   </main><!-- .layout-stacked__content -->
 </body>
+{{> inline-js }}
 
 </html>

@@ -149,6 +149,7 @@ async function generateTemplate(data: any,
   data.showSummaryOnly = summary;
 
   await registerPeerPartial(template, 'inline-css');
+  await registerPeerPartial(template, 'inline-js');
   await registerPeerPartial(template, 'vuln-card');
   await registerPeerPartial(template, 'remediation-css');
   await registerPeerPartial(template, 'actionable-remediations');
