@@ -9,19 +9,19 @@
         <nav class="remediation-card__nav">
           <ul class="remediation-card__nav-list">
             {{#if upgrades}}
-            <li class="remediation-card__nav-item--active"><span class="remediation-card__nav-link--active">Upgradable Issues ({{upgrades.length}})</span></li>
+            <li class="remediation-card__nav-item js-nav" data-toggle="upgrades"><span class="remediation-card__nav-link">Upgradable Issues ({{upgrades.length}})</span></li>
             {{/if}}
             {{#if patches}}
-            <li class="remediation-card__nav-item"><span class="remediation-card__nav-link">Patchable Issues ({{patches.length}})</span></li>
+            <li class="remediation-card__nav-item js-nav" data-toggle="patches"><span class="remediation-card__nav-link">Patchable Issues ({{patches.length}})</span></li>
             {{/if}}
             {{#if pins}}
-            <li class="remediation-card__nav-item"><span class="remediation-card__nav-link">Pinnable Issues ({{pins.length}})</span></li>
+            <li class="remediation-card__nav-item js-nav" data-toggle="pins"><span class="remediation-card__nav-link">Pinnable Issues ({{pins.length}})</span></li>
             {{/if}}
           </ul>
         </nav>
       </div>
       {{#if upgrades}}
-        <div class='remediation-card__pane'>
+        <div class='remediation-card__pane shown' data-pane="upgrades">
           <div class='remediation-card__layout-container'>
               {{#each upgrades}}
                 <div class='remediation-card__block'>
@@ -62,7 +62,7 @@
         </div>
       {{/if}}
       {{#if pins}}
-        <div class='remediation-card__pane'>
+        <div class='remediation-card__pane shown' data-pane="pins">
           <div class='remediation-card__layout-container'>
               {{#each pins}}
                 <div class='remediation-card__block'>
@@ -104,7 +104,7 @@
         </div>
       {{/if}}
       {{#if patches}}
-        <div class='remediation-card__pane'>
+        <div class='remediation-card__pane shown' data-pane='patches'>
           <div class='remediation-card__layout-container'>
               {{#each patches}}
                 <div class='remediation-card__block'>

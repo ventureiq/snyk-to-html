@@ -27,10 +27,18 @@
     margin-right: auto;
     padding: 0 20px;
   }
-  .remediation-card__pane {
+  .remediation-card__pane.shown {
     background-color: #fff;
     border-top: 1px solid #d3d3d9;
     padding: 32px 0;
+    display: block;
+    visibility: visible;
+    height: auto;
+  }
+  .remediation-card__pane {
+    display: none;
+    visibility: hidden;
+    height: 0;
   }
   .remediation-card__nav {
     position: relative;
@@ -47,7 +55,7 @@
     color: #4b45a1;
     margin: 0;
   }
-  .remediation-card__nav-item--active {
+  .remediation-card__nav-item.active {
     background-color: #fff;
     white-space: nowrap;
     list-style-type: none;
@@ -66,7 +74,7 @@
     font-size: 1rem;
     outline: none;
   }
-  .remediation-card__nav-link--active {
+  .remediation-card__nav-item.active > .remediation-card__nav-link {
     color: #393842;
     border: 1px solid #d3d3d9;
     border-bottom: none;
