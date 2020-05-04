@@ -83,9 +83,8 @@ test('test with remediations arg but no remediations in json', (t) => {
       path.join(__dirname, '..', 'template', 'remediation-report.hbs'),
       summaryOnly,
       (report) => {
-        console.log(report);
         // no actionable remediations displayed
-        t.contains(report, '<p>No remediations to display</p>', 'should contain remediation partial with message');
+        t.contains(report, '<h2>No remediation path available</h2>', 'should contain remediation partial with message');
       });
 });
 
