@@ -135,7 +135,6 @@ async function generateTemplate(data: any,
       data.remediation.patch,
       data.vulnerabilities,
     );
-    console.log(data.patch);
   }
   const vulnMetadata = groupVulns(data.vulnerabilities);
   const sortedVulns = _.orderBy(

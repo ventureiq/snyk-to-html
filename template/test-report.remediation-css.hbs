@@ -96,12 +96,14 @@
   }
   .remediation-card__expandable-wrapper >  .remediation-card__expand {
     visibility: hidden;
-    height: 0
+    height: 0;
   }
+
   .remediation-card__expandable-wrapper.shown > .remediation-card__expand {
     visibility: visible;
     height: auto;
   }
+
   .remediation-card__expandable-title {
     align-items: center;
     display: flex;
@@ -115,9 +117,14 @@
     margin-right: 8px;
     transition: transform .2s ease-in-out;
     position: relative;
-    /* transform: rotate(-90deg); */
   }
-  .remediation-card__chevron svg {
+  .remediation-card__expandable-wrapper svg {
+    transform: rotate(-90deg);
+  }
+  .remediation-card__expandable-wrapper.shown svg {
+    transform: initial;
+  }
+  .remediation-card__chevron .block-expandable__chevron {
     width: 20px;
     height: 20px;
   }
