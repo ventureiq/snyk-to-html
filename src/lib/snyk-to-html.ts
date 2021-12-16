@@ -191,6 +191,8 @@ async function generateTemplate(data: any,
   );
   data.hasMetatableData = !!data.projectName || !!data.path || !!data.displayTargetFile;
   data.vulnerabilities = sortedVulns;
+  data.vulBreakdown = sortedVulns.map((v) => v.metadata.severity).reduce((a, n) => { a[n] += 1; return a; },
+    Object.keys(severityMap).reduce((a, n) => { a[n] = 0; return a; }, {}));
   data.uniqueCount = vulnMetadata.vulnerabilitiesUniqueCount;
   data.summary = vulnMetadata.vulnerabilitiesPathsCount + ' vulnerable dependency paths';
   data.showSummaryOnly = summary;
@@ -273,7 +275,7 @@ async function processIacData(data: any, template: string, summary: boolean): Pr
     };
   });
   const totalIssues = projectsArrays.reduce((acc, item) => acc + item.infrastructureAsCodeIssues.length || 0, 0);
-  
+
   const processedData = {
     projects: projectsArrays,
     showSummaryOnly: summary,
@@ -301,7 +303,7 @@ async function readInputFromStdin(): Promise<string> {
 // handlebar helpers
 const hh = {
   markdown: marked,
-  moment: (date, format) => moment.utc(date).format(format),
+  moment: (date, format) => moment.utc(date).local().format(format),
   count: data => data && data.length,
   dump: (data, spacer) => JSON.stringify(data, null, spacer || null),
   // block helpers

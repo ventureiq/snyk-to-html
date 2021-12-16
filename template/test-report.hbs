@@ -19,17 +19,27 @@
 <body class="section-projects">
   <main class="layout-stacked">
     {{> header }}
-    {{#if hasMetatableData}}
-      {{> metatable }}
-    {{/if}}
 
     <div class="layout-container" style="padding-top: 35px;">
     {{#if vulnerabilities}}
-      <div class="cards--vuln filter--patch filter--ignore">
+      <table>
+        <thead>
+          <tr>
+            <th>Severity</th>
+            <th>Description</th>
+            <th>Caused by</th>
+          </tr>
+        </thead>
+        <tbody>
         {{#each vulnerabilities}}
-        {{> vuln-card showSummaryOnly=../showSummaryOnly}}
+          <tr>
+            <td>{{metadata.severity}}</td>
+            <td>{{metadata.title}}</td>
+            <td>{{metadata.name}}</td>
+          </tr>
         {{/each}}
-      </div><!-- cards -->
+        </tbody>
+      </table>
     {{else}}
       No known vulnerabilities detected.
     {{/if}}
