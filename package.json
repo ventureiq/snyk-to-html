@@ -1,5 +1,5 @@
 {
-  "name": "snyk-to-html",
+  "name": "@ventureiq/snyk-to-html",
   "description": "Convert JSON output from `snyk test --json` into a static HTML report",
   "main": "dist/index.js",
   "scripts": {
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/snyk/snyk-to-html.git"
+    "url": "git+https://github.com/snyk/snyk-to-html.git"
   },
   "pkg": {
     "scripts": [
@@ -64,5 +64,13 @@
     "assets": [
       "template/**/*.hbs"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/snyk/snyk-to-html/issues"
+  },
+  "homepage": "https://github.com/snyk/snyk-to-html#readme",
+  "version": "2.2.1",
+  "directories": {
+    "test": "test"
   }
 }
