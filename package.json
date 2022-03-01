@@ -69,7 +69,7 @@
     "url": "https://github.com/snyk/snyk-to-html/issues"
   },
   "homepage": "https://github.com/snyk/snyk-to-html#readme",
-  "version": "2.2.2",
+  "version": "2.2.2-p1",
   "directories": {
     "test": "test"
   }
