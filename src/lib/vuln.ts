@@ -1,4 +1,4 @@
-import * as _ from '@snyk/lodash';
+import * as _ from 'lodash';
 import { PatchRemediation, UpgradeRemediation, Vuln } from './types';
 
 export const severityMap = { low: 0, medium: 1, high: 2, critical: 3 };

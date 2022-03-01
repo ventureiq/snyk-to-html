@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as _ from '@snyk/lodash';
+import * as _ from 'lodash';
 import chalk from 'chalk';
 import * as debugModule from 'debug';
 import fs = require('fs');
